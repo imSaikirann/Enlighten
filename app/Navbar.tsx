@@ -30,7 +30,7 @@ export const Navbar = () => {
             <div className="hidden md:flex">
                 <ul className="flex flex-row space-x-10">
                     {navItems && navItems.map(items => (
-                        <li className={classNames({
+                        <li key={items.href} className={classNames({
                             'text-gray-50': items.href === currentPath,
                             'text-gray-500': items.href !== currentPath,
                             'hover:text-gray-100 transition-colors':true
@@ -53,7 +53,7 @@ export const Navbar = () => {
                 <div className="flex flex-col justify-center h-full">
                     <ul className="flex flex-col items-center space-y-8 text-lg">
                     {navItems && navItems.map(items => (
-                        <li className={classNames({
+                        <li key={items.href} className={classNames({
                             'text-gray-50': items.href === currentPath,
                             'text-gray-500': items.href !== currentPath,
                             'hover:text-gray-100 transition-colors':true
