@@ -19,7 +19,7 @@ export const Navbar = () => {
     ]
     return (
         <nav className="flex h-[100px] items-center justify-between px-5 md:px-14 bg-black shadow-lg text-white">
-            <h1 className="text-2xl font-bold">Enlighten</h1>
+            <h1 className="text-2xl font-bold cursor-pointer"><Link href="/">Enlighten</Link></h1>
 
             {/* Hamburger Icon for Mobile */}
             <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
