@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
-console.log('PRISMA DATABASE URL:', process.env.DATABASE_URL ? 'Loaded' : 'Not loaded');
+
 
 export async function POST(req: NextRequest) {
     try {
@@ -17,6 +17,15 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.log("Error parsing JSON body:", error);
     
+        return NextResponse.json({ message: "Error processing request", error }, { status: 400 });
+    }
+}
+
+export async function GET() {
+    try {
+        const data = await prisma.question.findMany()
+        return NextResponse.json(data)
+    } catch (error) {
         return NextResponse.json({ message: "Error processing request", error }, { status: 400 });
     }
 }
