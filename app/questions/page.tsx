@@ -1,10 +1,13 @@
 'use client';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Question } from '../types/types';
+import Input from '../components/Input';
 
 const Questions = () => {
   const [questionName, setQuestion] = useState<string>('');
   const [category, setCategory] = useState<string>('');
+  const [model, setModel] = useState<boolean>(false);
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
@@ -14,58 +17,75 @@ const Questions = () => {
     setCategory(e.target.value);
   };
 
+  const handleModel = () => {
+    setModel(!model);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-     await axios.post('/api/questions', {
+      await axios.post<Question>('/api/questions', {
         questionName,
         category,
       });
 
-     
-      alert("Done")
-   
       setQuestion('');
       setCategory('');
-
+      setModel(false); // Close modal after submit
     } catch (error) {
       console.error('Error submitting form:', error);
-      // You can add more specific error handling if needed
     }
   };
 
   return (
     <div className="px-14 py-8 max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Add Questions</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2>Total Questions: 10</h2>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Question</label>
-          <input
-            type="text"
-            value={questionName}
-            onChange={handleQuestionChange}
-            className="mt-1 block w-full px-3 py-2 border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="Enter your question"
-          />
+          <button
+            type="button"
+            onClick={handleModel}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none"
+          >
+            Add question
+          </button>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Category</label>
-          <input
-            type="text"
-            value={category}
-            onChange={handleCategoryChange}
-            className="mt-1 block w-full px-3 py-2 border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="Enter the category"
-          />
+      </div>
+
+      {/* Modal */}
+      {model && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50 p-5">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-[500px]">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Add New Question</h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Question</label>
+                <Input value={questionName} onChange={handleQuestionChange} placeholder="Enter your question" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Category</label>
+                <Input value={category} onChange={handleCategoryChange} placeholder="Enter the category" />
+              </div>
+              <div className="flex items-center justify-end space-x-3">
+                <button
+                  type="button"
+                  onClick={handleModel}
+                  className="px-4 py-2 bg-gray-300 rounded-md shadow hover:bg-gray-400 focus:outline-none"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <button
-          type="submit"
-          className="mt-4 w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Submit
-        </button>
-      </form>
+      )}
     </div>
   );
 };
