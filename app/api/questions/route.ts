@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
+console.log('PRISMA DATABASE URL:', process.env.DATABASE_URL ? 'Loaded' : 'Not loaded');
+
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
