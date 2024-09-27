@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ export const Navbar = () => {
 
             {/* Hamburger Icon for Mobile */}
             <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-                {isOpen ? <XMarkIcon className="h-8 w-8 text-white" /> : <Bars3Icon className="h-8 w-8 text-white" />}
+                {isOpen ? <XMarkIcon className="h-8 w-8 text-white" /> : <Bars3BottomLeftIcon className="h-8 w-8 text-white" />}
             </div>
 
             {/* Menu for larger screens */}
