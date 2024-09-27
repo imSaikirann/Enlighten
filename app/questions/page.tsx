@@ -32,7 +32,7 @@ const Questions = () => {
 
       setQuestion('');
       setCategory('');
-      setModel(false); // Close modal after submit
+      setModel(false);
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -48,7 +48,7 @@ const Questions = () => {
             onClick={handleModel}
             className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none"
           >
-            Add question
+            Add questions
           </button>
         </div>
       </div>
