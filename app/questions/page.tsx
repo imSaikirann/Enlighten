@@ -18,7 +18,7 @@ const Questions = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/questions', {
+     await axios.post('/api/questions', {
         questionName,
         category,
       });
