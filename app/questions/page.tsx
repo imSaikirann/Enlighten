@@ -15,9 +15,7 @@ const Questions = () => {
     setQuestion(e.target.value);
   };
 
-  const handleCategoryChange = (e: any) => {
-    setCategory(e.target.value);
-  };
+
 
   const handleModel = () => {
     setModel(!model);
