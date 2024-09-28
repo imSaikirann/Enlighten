@@ -10,3 +10,10 @@ export interface Question {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
   }
+
+
+export interface Category  {
+    id: string;
+    name: string;
+};
+  

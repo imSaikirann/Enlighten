@@ -21,3 +21,10 @@ model Question {
   updatedAt   DateTime @updatedAt
 }
 
+model Categories {
+  id          Int      @id @default(autoincrement())
+  name String  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
