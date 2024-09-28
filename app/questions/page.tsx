@@ -15,7 +15,7 @@ const Questions = () => {
     setQuestion(e.target.value);
   };
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCategoryChange = (e: any) => {
     setCategory(e.target.value);
   };
 
@@ -121,38 +121,56 @@ const Questions = () => {
       </div>
 
       {/* Modal */}
-      {model && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50 p-5">
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 w-full max-w-lg">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Add New Question</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Question</label>
-                <Input value={questionName} onChange={handleQuestionChange} placeholder="Enter your question" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Category</label>
-                <Input value={category} onChange={handleCategoryChange} placeholder="Enter the category" />
-              </div>
-              <div className="flex items-center justify-end space-x-3">
-                <button
-                  type="button"
-                  onClick={handleModel}
-                  className="px-4 py-2 bg-gray-300 rounded-md shadow hover:bg-gray-400 transition duration-200"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transition duration-200"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+     {model && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50 p-5">
+    <div className="bg-gray-800 rounded-lg shadow-2xl p-6 md:p-8 w-full max-w-lg transform transition-transform duration-300 scale-100 hover:scale-105">
+      <h3 className="text-2xl font-bold text-white mb-6 text-center">Add New Question</h3>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-sm font-semibold text-white mb-2">Question</label>
+          <Input 
+            value={questionName} 
+            onChange={handleQuestionChange} 
+            placeholder="Enter your question"
+          
+          />
         </div>
-      )}
+
+        <div>
+          <label className="block text-sm font-semibold text-white mb-2">Category</label>
+          <select 
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)} 
+            className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="" className="text-gray-400">Select a category</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category.name} className="text-gray-900">{category.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex items-center justify-end space-x-3">
+          <button
+            type="button"
+            onClick={handleModel}
+            className="px-4 py-2 bg-gray-600 text-white rounded-md shadow-lg hover:bg-gray-700 transition duration-200 ease-in-out focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-lg hover:bg-indigo-700 transition duration-200 ease-in-out focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
