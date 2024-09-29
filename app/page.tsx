@@ -24,7 +24,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/questions") 
+    fetch("/api/questions")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -35,9 +35,8 @@ export default function Home() {
         setQuestions(data);
         setLoading(false);
       })
-      
       .catch((err) => {
-        setError(err);
+        setError(err.message);
         setLoading(false);
       });
   }, []);
@@ -59,24 +58,24 @@ export default function Home() {
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:px-14 ">
+    <div className="p-4 sm:p-6 lg:px-14 bg-black min-h-screen">
       {questions.length === 0 ? (
-        <div className="text-center">No questions found</div>
+        <div className="text-center text-gray-500">No questions found</div>
       ) : (
         <div className="flex flex-col space-y-6">
           {questions.map((question) => (
             <div
               key={question.id}
-              className="bg-gray-900 shadow-md border border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
+              className="bg-boxColor shadow-sm border border-black rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
-              <h2 className="text-xl font-semibold mb-2">{question.questionName}</h2>
-              <p className="text-gray-100 mb-4">Category: {question.category}</p>
+              <h2 className="text-lg font-semibold mb-2 text-gray-200">{question.questionName}</h2>
+              <p className="text-gray-500 mb-4 text-sm">Category: {question.category}</p>
 
-              <h3 className="text-lg font-medium mt-2 mb-2">Answers:</h3>
+            
               {question.answers.length > 0 ? (
-                <ul className="list-disc ml-5 space-y-1">
+                <ul className=" space-y-2">
                   {question.answers.map((answer) => (
-                    <li key={answer.id} className="text-gray-100 border-b border-gray-600 pb-2 mb-2">
+                    <li key={answer.id} className="text-gray-300 border border-gray-900 p-3 rounded-md pb-2">
                       {answer.answerText}
                     </li>
                   ))}
@@ -84,6 +83,43 @@ export default function Home() {
               ) : (
                 <p className="text-gray-500">No answers available.</p>
               )}
+              <div className="flex justify-between items-center mt-4">
+                <button className="text-blue-500 hover:underline text-sm">Reply</button>
+                <div className="flex space-x-3">
+                  <button className="text-gray-500 hover:text-blue-500">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button className="text-gray-500 hover:text-red-500">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
