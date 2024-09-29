@@ -70,7 +70,7 @@ const Questions = () => {
 
   return (
     <div className="px-4 py-8 md:px-14 max-w-7xl mx-auto">
-      <div className="flex flex-col-reverse gap-8 md:flex-row">
+      <div className="flex  mt-[120px] flex-col-reverse gap-8 md:flex-row">
         
         {/* Left: Questions List */}
         <div className="md:w-2/3 w-full bg-gray-900 p-4 md:p-6 rounded-lg shadow-lg space-y-6">

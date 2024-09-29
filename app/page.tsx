@@ -62,7 +62,7 @@ export default function Home() {
       {questions.length === 0 ? (
         <div className="text-center text-gray-500">No questions found</div>
       ) : (
-        <div className="flex flex-col space-y-6">
+        <div className="flex  mt-[120px] flex-col space-y-6">
           {questions.map((question) => (
             <div
               key={question.id}
@@ -84,7 +84,7 @@ export default function Home() {
                 <p className="text-gray-500">No answers available.</p>
               )}
               <div className="flex justify-between items-center mt-4">
-                <button className="text-blue-500 hover:underline text-sm">Reply</button>
+           
                 <div className="flex space-x-3">
                   <button className="text-gray-500 hover:text-blue-500">
                     <svg
