@@ -23,8 +23,13 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
     try {
-        const data = await prisma.question.findMany()
-        return NextResponse.json(data)
+        const questions = await prisma.question.findMany({
+            include: {
+                answers: true, // Include related answers
+            },
+        });
+
+        return NextResponse.json(questions)
     } catch (error) {
         return NextResponse.json({ message: "Error processing request", error }, { status: 400 });
     }

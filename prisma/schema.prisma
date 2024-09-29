@@ -14,17 +14,26 @@ datasource db {
 }
 
 model Question {
-  id          Int      @id @default(autoincrement())
-  questionName String  
-  category    String  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int       @id @default(autoincrement())
+  questionName String
+  category     String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  answers      Answers[]
 }
 
 model Categories {
-  id          Int      @id @default(autoincrement())
-  name String  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model Answers {
+  id         Int      @id @default(autoincrement())
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id])
+  answerText String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
