@@ -14,7 +14,7 @@ export const Navbar = () => {
     const currentPath = usePathname()
     const navItems = [
         { name: "  Question Cube", href: "/questions" },
-        { name: "  Signinn", href: "/signin" },
+        { name: "  Signin", href: "/signin" },
         { name: "Get Started", href: "/signup" },
     ]
     return (
