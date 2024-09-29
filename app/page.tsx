@@ -35,8 +35,9 @@ export default function Home() {
         setQuestions(data);
         setLoading(false);
       })
+      
       .catch((err) => {
-        setError("Failed to load questions");
+        setError(err);
         setLoading(false);
       });
   }, []);
