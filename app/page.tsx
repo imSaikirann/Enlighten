@@ -59,7 +59,7 @@ export default function Home() {
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:px-14 bg-black min-h-screen">
+    <div className="p-3 sm:p-6 lg:px-14 bg-black min-h-screen">
       {questions.length === 0 ? (
         <div className="text-center text-gray-500">No questions found</div>
       ) : (
@@ -79,11 +79,11 @@ export default function Home() {
               {question.answers.length > 0 ? (
                 <div className="flex flex-col space-y-4">
                   {/* Display the current answer */}
-                  <div className="text-gray-300 border md:text-lg border-gray-900 p-3 rounded-md">
+                  <div className="text-gray-300  md:text-lg  p-1 rounded-md">
                     {question.answers[currentAnswerIndex]?.answerText}
                   </div>
 
-                  <div className="flex justify-between items-center">
+                  <div className="flex space-x-2 items-center">
                     <button
                       onClick={() => setCurrentAnswerIndex((prev) => Math.max(prev - 1, 0))}
                       disabled={currentAnswerIndex === 0}
