@@ -25,7 +25,7 @@ export async function GET() {
     try {
         const questions = await prisma.question.findMany({
             include: {
-                answers: true, // Include related answers
+                answers: true, 
             },
         });
 

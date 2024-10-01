@@ -3,15 +3,18 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Question, Category } from '../types/types';
 import Input from '../components/Input';
-
+import { useAppDispatch,useAppSelector } from "../store/hooks";
+import { fetchData } from "../store/categorySlice";
 const Questions = () => {
   const [questionName, setQuestion] = useState<string>(''); 
-  const [category, setCategory] = useState<string>('');
+
   const [model, setModel] = useState<boolean>(false);
   const [data, setData] = useState<Question[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [category, setCategory] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
+  const dispatch = useAppDispatch()
+  const categories = useAppSelector((state) => state.items)
+  const dataStatus = useAppSelector((state) => state.status);
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
   };
@@ -30,9 +33,9 @@ const Questions = () => {
       });
 
       setQuestion('');
-      setCategory('');
+   
       setModel(false);
-      getData();  // Fetch data again after submitting a new question
+      getData(); 
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -47,18 +50,16 @@ const Questions = () => {
     }
   };
 
-  const getCategories = async () => {
-    try {
-      const res = await axios.get<Category[]>('/api/tags');
-      setCategories(res.data);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
+  useEffect(() => {
+    if (dataStatus === 'idle') {
+      dispatch(fetchData());
     }
-  };
+    console.log(data) 
+  }, [dispatch, dataStatus]);
 
   useEffect(() => {
     getData();  
-    getCategories();  
+    dispatch(fetchData());
   }, []);
 
   // Filter questions by selected category
@@ -69,16 +70,16 @@ const Questions = () => {
 
 
   return (
-    <div className="px-4 py-8 md:px-14 max-w-7xl mx-auto">
+    <div className="px-4 py-8 bg-black md:px-14 max-w-full h-full mx-auto">
       <div className="flex  mt-[120px] flex-col-reverse gap-8 md:flex-row">
         
         {/* Left: Questions List */}
-        <div className="md:w-2/3 w-full bg-gray-900 p-4 md:p-6 rounded-lg shadow-lg space-y-6">
+        <div className="md:w-2/3 w-full bg-boxColor p-4 md:p-6 rounded-lg shadow-lg space-y-6">
           <h2 className="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-3">Questions List</h2>
           <div className="space-y-4">
             {filterQuestions.length > 0 ? (
               filterQuestions.map((question, index) => (
-                <div key={index} className="bg-gray-800 p-4 rounded-md border border-gray-700">
+                <div key={index} className="bg-boxColor p-4 rounded-md border border-gray-700">
                   <p className="text-lg font-medium text-white mb-2">{question.questionName}</p>
                   <span className="text-sm text-indigo-400">{question.category}</span>
                 </div>
@@ -90,7 +91,7 @@ const Questions = () => {
         </div>
 
         {/* Right: Total Questions and Add Button */}
-        <div className="md:w-1/3 w-full bg-gray-900 p-6 rounded-lg shadow-lg flex flex-col space-y-6">
+        <div className="md:w-1/3 w-full bg-boxColor p-6 rounded-lg shadow-lg flex flex-col space-y-6">
           
           {/* Total Questions */}
           <div className="text-center">

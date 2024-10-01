@@ -17,3 +17,20 @@ export interface Category  {
     name: string;
 };
   
+
+export interface Answer {
+  id: number;
+  questionId: number;
+  answerText: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+ export interface Question {
+  id: number;
+  questionName: string;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  answers: Answer[];
+}
