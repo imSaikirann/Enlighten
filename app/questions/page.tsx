@@ -13,7 +13,7 @@ const Questions = () => {
   const [category, setCategory] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const dispatch = useAppDispatch()
-  const categories = useAppSelector((state) => state.items)
+  const categories: Category[] = useAppSelector((state) => state.items);
   const dataStatus = useAppSelector((state) => state.status);
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
