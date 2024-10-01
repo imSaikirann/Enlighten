@@ -18,7 +18,7 @@ export const Navbar = () => {
         { name: "Get Started", href: "/signup" },
     ]
     return (
-        <nav className="flex h-[100px] items-center justify-between fixed w-full px-5 md:px-14 bg-black shadow-lg text-white">
+        <nav className="flex h-[100px] mb-[120px] items-center justify-between fixed w-full px-5 md:px-14 bg-black shadow-lg text-white">
             <h1 className="text-2xl font-bold cursor-pointer"><Link href="/">Enlighten</Link></h1>
 
             {/* Hamburger Icon for Mobile */}

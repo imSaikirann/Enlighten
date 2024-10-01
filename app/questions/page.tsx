@@ -62,7 +62,7 @@ const Questions = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  // Filter questions by selected category
+
   const filterQuestions = selectedCategory === "All"
     ? data
     : data.filter((question) => question.category === selectedCategory);
