@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //
 interface DataState {
-  items: any[];
+  items: [];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null; 
 }

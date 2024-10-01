@@ -55,12 +55,12 @@ const Questions = () => {
       dispatch(fetchData());
     }
     console.log(data) 
-  }, [dispatch, dataStatus]);
+  }, [dispatch, dataStatus,data]);
 
   useEffect(() => {
     getData();  
     dispatch(fetchData());
-  }, []);
+  }, [dispatch]);
 
   // Filter questions by selected category
   const filterQuestions = selectedCategory === "All"
